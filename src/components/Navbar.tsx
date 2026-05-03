@@ -59,7 +59,7 @@ export default function Navbar() {
   );
 
   return (
-    <div className="card">
+    <div className="card navbar">
       <Menubar model={items} {...{ start, end }} />
     </div>
   );

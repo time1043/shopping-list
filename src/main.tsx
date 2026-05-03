@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 
 import App from './App.tsx';
 import './index.css';
+// import '@/assets/flags.css';
 
 /**
  mkdir -p public/themes
