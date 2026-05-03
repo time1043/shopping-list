@@ -5,6 +5,8 @@ import { Badge } from 'primereact/badge';
 import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
 
+import ThemeToggle from './ThemeToggle';
+
 interface CustomMenuItem extends MenuItem {
   badge?: number;
   shortcut?: string;
@@ -48,6 +50,7 @@ export default function Navbar() {
   const end = (
     <div className="flex align-items-center gap-2">
       <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />
+      <ThemeToggle />
       <Avatar
         image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
         shape="circle"
