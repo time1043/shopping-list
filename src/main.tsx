@@ -1,3 +1,4 @@
+import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import { PrimeReactProvider } from 'primereact/api';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
@@ -9,6 +10,7 @@ import './index.css';
 
 // https://primereact.org/installation/
 // https://primereact.org/icons/
+// https://primereact.org/theming/#primeflex
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <PrimeReactProvider>

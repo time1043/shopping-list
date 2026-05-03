@@ -1,9 +1,9 @@
-import { Button } from 'primereact/button';
+import Navbar from './components/Navbar';
 
 export default function App() {
   return (
-    <div className="card flex justify-content-center">
-      <Button label="Check" icon="pi pi-check" />
-    </div>
+    <>
+      <Navbar />
+    </>
   );
 }
