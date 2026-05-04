@@ -5,20 +5,9 @@ import { Tag } from 'primereact/tag';
 import { classNames } from 'primereact/utils';
 import { useEffect, useState } from 'react';
 
-import { ProductService } from '@/services/ProductService';
+import type { Product } from '@/types/Product';
 
-interface Product {
-  id: string;
-  code: string;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-  category: string;
-  quantity: number;
-  inventoryStatus: string;
-  rating: number;
-}
+import { ProductService } from '@/services/ProductService';
 
 // https://primereact.org/dataview/#pagination
 // https://primereact.org/paginator/

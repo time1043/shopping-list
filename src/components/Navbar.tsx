@@ -1,9 +1,12 @@
 import type { MenuItem, MenuItemOptions } from 'primereact/menuitem';
 
+import { useSetAtom } from 'jotai';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
+
+import { visibleAtom } from '@/states/visibleAtom';
 
 import ThemeToggle from './ThemeToggle';
 
@@ -13,7 +16,11 @@ interface CustomMenuItem extends MenuItem {
 }
 
 // https://primereact.org/menubar/#template
+// https://primereact.org/menubar/#command
 export default function Navbar() {
+  // const [visible, setVisible] = useState(false);
+  const setVisible = useSetAtom(visibleAtom);
+
   const itemRenderer = (item: MenuItem, _options: MenuItemOptions) => {
     const custom = item as CustomMenuItem;
     return (
@@ -36,6 +43,7 @@ export default function Navbar() {
       icon: 'pi pi-shopping-cart',
       badge: 3,
       template: itemRenderer,
+      command: () => setVisible(true),
     } as CustomMenuItem,
   ];
 
