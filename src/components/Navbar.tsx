@@ -1,11 +1,12 @@
 import type { MenuItem, MenuItemOptions } from 'primereact/menuitem';
 
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
 
+import { CartItemsCountAtom } from '@/states/cartAtom';
 import { visibleAtom } from '@/states/visibleAtom';
 
 import ThemeToggle from './ThemeToggle';
@@ -20,6 +21,7 @@ interface CustomMenuItem extends MenuItem {
 export default function Navbar() {
   // const [visible, setVisible] = useState(false);
   const setVisible = useSetAtom(visibleAtom);
+  const cartItemsCount = useAtomValue(CartItemsCountAtom);
 
   const itemRenderer = (item: MenuItem, _options: MenuItemOptions) => {
     const custom = item as CustomMenuItem;
@@ -27,7 +29,7 @@ export default function Navbar() {
       <a className="flex align-items-center p-menuitem-link">
         <span className={item.icon} />
         <span className="mx-2">{item.label}</span>
-        {custom.badge && <Badge className="ml-auto" value={custom.badge} />}
+        {custom.badge > 0 && <Badge className="ml-auto" value={custom.badge} />}
         {custom.shortcut && (
           <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
             {custom.shortcut}
@@ -41,7 +43,7 @@ export default function Navbar() {
     {
       label: 'Cart',
       icon: 'pi pi-shopping-cart',
-      badge: 3,
+      badge: cartItemsCount,
       template: itemRenderer,
       command: () => setVisible(true),
     } as CustomMenuItem,

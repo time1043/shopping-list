@@ -3,20 +3,17 @@ import { DataView } from 'primereact/dataview';
 import { Rating } from 'primereact/rating';
 import { Tag } from 'primereact/tag';
 import { classNames } from 'primereact/utils';
-import { useEffect, useState } from 'react';
 
 import type { Product } from '@/types/Product';
 
-import { ProductService } from '@/services/ProductService';
+import { useToCart } from '@/hooks/useCartList';
+import { useShopList } from '@/hooks/useShopList';
 
 // https://primereact.org/dataview/#pagination
 // https://primereact.org/paginator/
 export default function ShopList() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    ProductService.getProducts().then((data) => setProducts(data));
-  }, []);
+  const { addToCart } = useToCart();
+  const { products } = useShopList();
 
   const getSeverity = (product: Product) => {
     switch (product.inventoryStatus) {
@@ -65,7 +62,8 @@ export default function ShopList() {
                 icon="pi pi-shopping-cart"
                 className="p-button-rounded"
                 disabled={product.inventoryStatus === 'OUTOFSTOCK'}
-              ></Button>
+                onClick={() => addToCart(product)}
+              />
             </div>
           </div>
         </div>

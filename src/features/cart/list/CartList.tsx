@@ -1,16 +1,12 @@
+import { Badge } from 'primereact/badge';
 import { OrderList } from 'primereact/orderlist';
-import { useEffect, useState } from 'react';
 
 import type { Product } from '@/types/Product';
 
-import { ProductService } from '@/services/ProductService';
+import { useCartList } from '@/hooks/useCartList';
 
 export default function CartList() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    ProductService.getProductsSmall().then((data) => setProducts(data));
-  }, []);
+  const { cartItems, setCartItems } = useCartList();
 
   const itemTemplate = (item: Product) => {
     return (
@@ -28,6 +24,7 @@ export default function CartList() {
           </div>
         </div>
         <span className="font-bold text-900">${item.price}</span>
+        <Badge value={item.quantity} />
       </div>
     );
   };
@@ -36,8 +33,8 @@ export default function CartList() {
     <div className="card 2xl:flex 2xl:justify-content-center">
       <OrderList
         dataKey="id"
-        value={products}
-        onChange={(e) => setProducts(e.value)}
+        value={cartItems}
+        onChange={(e) => setCartItems(e.value)}
         itemTemplate={itemTemplate}
         header="Cart List"
       />

@@ -1,3 +1,5 @@
+import { Toaster } from 'sonner';
+
 import BasicDialog from './components/BasicDialog';
 import Navbar from './components/Navbar';
 import CartList from './features/cart/list/CartList';
@@ -14,6 +16,8 @@ export default function App() {
           <CartList />
         </BasicDialog>
       </main>
+
+      <Toaster position="top-center" richColors />
     </>
   );
 }
