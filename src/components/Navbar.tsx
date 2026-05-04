@@ -1,12 +1,13 @@
 import type { MenuItem, MenuItemOptions } from 'primereact/menuitem';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { Avatar } from 'primereact/avatar';
 import { Badge } from 'primereact/badge';
 import { InputText } from 'primereact/inputtext';
 import { Menubar } from 'primereact/menubar';
 
 import { CartItemsCountAtom } from '@/states/cartAtom';
+import { searchTextAtom } from '@/states/searchAtom';
 import { visibleAtom } from '@/states/visibleAtom';
 
 import ThemeToggle from './ThemeToggle';
@@ -19,6 +20,8 @@ interface CustomMenuItem extends MenuItem {
 // https://primereact.org/menubar/#template
 // https://primereact.org/menubar/#command
 export default function Navbar() {
+  const [searchText, setSearchText] = useAtom(searchTextAtom);
+
   // const [visible, setVisible] = useState(false);
   const setVisible = useSetAtom(visibleAtom);
   const cartItemsCount = useAtomValue(CartItemsCountAtom);
@@ -59,7 +62,13 @@ export default function Navbar() {
   );
   const end = (
     <div className="flex align-items-center gap-2">
-      <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />
+      <InputText
+        placeholder="Search"
+        type="text"
+        className="w-8rem sm:w-auto"
+        value={searchText}
+        onChange={(e) => setSearchText(e.target.value)}
+      />
       <ThemeToggle />
       <Avatar
         image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
